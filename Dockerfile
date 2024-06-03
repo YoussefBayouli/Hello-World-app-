@@ -1,4 +1,20 @@
-FROM python:3.12.3
+FROM python:3.10-slim
+
+# working directory /app
 WORKDIR /app
-COPY . .
-CMD ["python", "hello-world.py"]
+
+# Copying the current directory contents into the container at /app
+COPY . /app
+
+# We Install any needed packages specified in requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Here we Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# environment variable
+ENV NAME World
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
+

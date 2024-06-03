@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: python-hello-world
-        image: spacegeekops/python-hello-world:latest
+        image: spacegeekops/flask-hello-world:latest
         ports:
         - containerPort: 3000
         resources:
@@ -38,3 +38,10 @@ spec:
             port: 3000
           initialDelaySeconds: 5
           periodSeconds: 10
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 3000
+          fsGroup: 2000
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+      restartPolicy: Always
